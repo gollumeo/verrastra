@@ -1,0 +1,25 @@
+{
+    "name": "gollumeo/verrastra",
+    "description": "Mythical test runner for PHP. Attribute-powered. Intention-first. Write specs like incantations.",
+    "type": "library",
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "laravel/pint": "^1.22"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Gollumeo\\Verrastra\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Golluméo",
+            "email": "p.mauriello54@gmail.com"
+        }
+    ],
+    "require": {},
+    "bin": [
+        "bin/verrastra"
+    ]
+}
