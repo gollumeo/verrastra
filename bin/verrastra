@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+
+<?php
+
+use Gollumeo\Verrastra\Runner\Kernel;
+
+require __DIR__.'/../vendor/autoload.php';
+
+exit(new Kernel()->run());
