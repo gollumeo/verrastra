@@ -6,4 +6,9 @@ use Gollumeo\Verrastra\Runner\Kernel;
 
 require __DIR__.'/../vendor/autoload.php';
 
-exit(new Kernel()->run());
+try {
+    exit(new Kernel()->run());
+} catch (Throwable $e) {
+    fwrite(STDERR, '❌ Fatal error: '.$e->getMessage().PHP_EOL);
+    exit(1);
+}
