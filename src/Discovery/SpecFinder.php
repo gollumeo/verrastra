@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Gollumeo\Verrastra\Discovery;
 
+use Exception;
 use FilesystemIterator;
 use Gollumeo\Verrastra\Contract\SpecCase;
 use RecursiveDirectoryIterator;
@@ -18,33 +19,69 @@ final class SpecFinder
      */
     private array $classes = [];
 
+    /**
+     * @return class-string[]
+     *
+     * @throws Exception
+     */
     public function find(string $path = 'specs'): array
     {
-        $this->detectClasses($path);
+        if (! $this->isValidPath($path)) {
+            throw new Exception("Invalid path: $path");
+        }
+
+        $this->loadPhpFiles($path);
+
+        $snapshot = get_declared_classes();
+
+        $newClasses = $this->getNewDeclaredClasses($snapshot);
+
+        $this->filterSpecCases($newClasses);
 
         return $this->classes;
     }
 
-    private function detectClasses(string $path): void
+    private function isValidPath(string $path): bool
     {
-        $snapshot = get_declared_classes();
+        return is_dir($path) || is_file($path);
+    }
 
+    /**
+     * @throws Exception
+     */
+    private function loadPhpFiles(string $path): void
+    {
         $directory = new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
-        $iterator = new RecursiveIteratorIterator($directory);
+        $files = new RecursiveIteratorIterator($directory);
 
         /** @var SplFileInfo $file */
-        foreach ($iterator as $file) {
+        foreach ($files as $file) {
             if (! $file->isFile() || $file->getExtension() !== 'php') {
                 continue;
             }
 
             require_once $file->getPathname();
         }
+    }
 
+    /**
+     * @param  class-string[]  $snapshot
+     * @return class-string[]
+     */
+    private function getNewDeclaredClasses(array $snapshot): array
+    {
         $after = get_declared_classes();
-        $newClasses = array_diff($after, $snapshot);
 
-        foreach ($newClasses as $class) {
+        return array_diff($after, $snapshot);
+    }
+
+    /**
+     * @param  class-string[]  $classes
+     */
+    private function filterSpecCases(array $classes): void
+    {
+        /** @var class-string<SpecCase> $class */
+        foreach ($classes as $class) {
             if (! class_exists($class)) {
                 continue;
             }
