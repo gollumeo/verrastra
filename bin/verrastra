@@ -7,9 +7,11 @@ use Gollumeo\Verrastra\Runner\Kernel;
 
 require __DIR__.'/../vendor/autoload.php';
 
+$output = new CLIOutput();
+
 try {
     exit(new Kernel(new CLIOutput())->run());
 } catch (Throwable $e) {
-    fwrite(STDERR, '❌ Fatal error: '.$e->getMessage().PHP_EOL);
+    $output->error("FATAL ERROR: {$e->getMessage()}");
     exit(1);
 }

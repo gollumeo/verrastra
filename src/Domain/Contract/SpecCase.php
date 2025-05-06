@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Gollumeo\Verrastra\Contract;
+namespace Gollumeo\Verrastra\Domain\Contract;
 
 interface SpecCase {}

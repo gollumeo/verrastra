@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Gollumeo\Verrastra\Runner;
 
 use Exception;
-use Gollumeo\Verrastra\Discovery\SpecFinder;
+use Gollumeo\Verrastra\Infrastructure\Discovery\SpecFinder;
 use Gollumeo\Verrastra\Presentation\CLI\Contract\CLIOutputContract;
 
 final class Kernel
@@ -34,7 +34,7 @@ final class Kernel
             return 0;
 
         } catch (Exception $exception) {
-            echo $exception->getMessage();
+            $this->output->error($exception->getMessage());
 
             return 1;
         }

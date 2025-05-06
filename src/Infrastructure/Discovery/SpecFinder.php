@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Gollumeo\Verrastra\Discovery;
+namespace Gollumeo\Verrastra\Infrastructure\Discovery;
 
 use Exception;
 use FilesystemIterator;
-use Gollumeo\Verrastra\Contract\SpecCase;
+use Gollumeo\Verrastra\Application\Contract\SpecDiscoveryContract;
+use Gollumeo\Verrastra\Domain\Contract\SpecCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
 use SplFileInfo;
 
-final class SpecFinder
+final class SpecFinder implements SpecDiscoveryContract
 {
     /**
      * @var list<class-string<SpecCase>>
