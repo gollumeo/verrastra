@@ -2,12 +2,13 @@
 
 <?php
 
+use Gollumeo\Verrastra\Presentation\CLI\CLIOutput;
 use Gollumeo\Verrastra\Runner\Kernel;
 
 require __DIR__.'/../vendor/autoload.php';
 
 try {
-    exit(new Kernel()->run());
+    exit(new Kernel(new CLIOutput())->run());
 } catch (Throwable $e) {
     fwrite(STDERR, '❌ Fatal error: '.$e->getMessage().PHP_EOL);
     exit(1);
