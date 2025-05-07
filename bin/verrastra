@@ -2,6 +2,8 @@
 
 <?php
 
+use Gollumeo\Verrastra\Application\UseCase\DiscoverSpecs;
+use Gollumeo\Verrastra\Infrastructure\Discovery\FilesystemSpecs;
 use Gollumeo\Verrastra\Presentation\CLI\CLIOutput;
 use Gollumeo\Verrastra\Runner\Kernel;
 
@@ -10,7 +12,7 @@ require __DIR__.'/../vendor/autoload.php';
 $output = new CLIOutput();
 
 try {
-    exit(new Kernel(new CLIOutput())->run());
+    exit(new Kernel(new CLIOutput(), new DiscoverSpecs(new FilesystemSpecs()))->run());
 } catch (Throwable $e) {
     $output->error("FATAL ERROR: {$e->getMessage()}");
     exit(1);
