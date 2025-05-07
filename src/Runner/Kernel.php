@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace Gollumeo\Verrastra\Runner;
 
 use Exception;
-use Gollumeo\Verrastra\Infrastructure\Discovery\FilesystemSpecs;
+use Gollumeo\Verrastra\Application\UseCase\DiscoverSpecs;
 use Gollumeo\Verrastra\Presentation\CLI\Contract\CLIOutputContract;
 
-final class Kernel
+final readonly class Kernel
 {
     public function __construct(
         private CLIOutputContract $output,
+        private DiscoverSpecs $discoverSpecs,
     ) {}
 
     public function run(): int
     {
-        $specFinder = new FilesystemSpecs();
         try {
-            $specs = $specFinder->find();
+            $specs = $this->discoverSpecs->handle();
 
             if (count($specs) === 0) {
                 $this->output->warning('No specs found in ./specs');
