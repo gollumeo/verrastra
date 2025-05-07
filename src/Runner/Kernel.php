@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Gollumeo\Verrastra\Runner;
 
 use Exception;
-use Gollumeo\Verrastra\Infrastructure\Discovery\SpecFinder;
+use Gollumeo\Verrastra\Infrastructure\Discovery\FilesystemSpecs;
 use Gollumeo\Verrastra\Presentation\CLI\Contract\CLIOutputContract;
 
 final class Kernel
@@ -16,7 +16,7 @@ final class Kernel
 
     public function run(): int
     {
-        $specFinder = new SpecFinder();
+        $specFinder = new FilesystemSpecs();
         try {
             $specs = $specFinder->find();
 
