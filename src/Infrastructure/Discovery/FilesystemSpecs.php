@@ -13,7 +13,7 @@ use RecursiveIteratorIterator;
 use ReflectionClass;
 use SplFileInfo;
 
-final class SpecFinder implements SpecDiscoveryContract
+final class FilesystemSpecs implements SpecDiscoveryContract
 {
     /**
      * @var list<class-string<SpecCase>>
