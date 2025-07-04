@@ -10,32 +10,32 @@ final class CLIOutput implements CLIOutputContract
 {
     public function info(string $message): void
     {
-        $this->write(STDOUT, "\033[36mℹ {$message}\033[0m");
+        $this->write(stream: STDOUT, message: "\033[36mℹ {$message}\033[0m");
     }
 
     public function success(string $message): void
     {
-        $this->write(STDOUT, "\033[32m✔ {$message}\033[0m");
+        $this->write(stream: STDOUT, message: "\033[32m✔ {$message}\033[0m");
     }
 
     public function warning(string $message): void
     {
-        $this->write(STDOUT, "\033[33m⚠ {$message}\033[0m");
+        $this->write(stream: STDOUT, message: "\033[33m⚠ {$message}\033[0m");
     }
 
     public function hint(string $message): void
     {
-        $this->write(STDOUT, "\033[36m  → {$message}\033[0m");
+        $this->write(stream: STDOUT, message: "\033[36m  → {$message}\033[0m");
     }
 
     public function error(string $message): void
     {
-        $this->write(STDERR, "\033[31m✘ {$message}\033[0m");
+        $this->write(stream: STDERR, message: "\033[31m✘ {$message}\033[0m");
     }
 
     public function raw(string $message): void
     {
-        $this->write(STDOUT, $message);
+        $this->write(stream: STDOUT, message: $message);
     }
 
     /**
@@ -43,6 +43,6 @@ final class CLIOutput implements CLIOutputContract
      */
     private function write($stream, string $message): void
     {
-        fwrite($stream, $message.PHP_EOL);
+        fwrite(stream: $stream, data: $message.PHP_EOL);
     }
 }
