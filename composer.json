@@ -4,7 +4,8 @@
     "type": "library",
     "require-dev": {
         "phpstan/phpstan": "^2.1",
-        "laravel/pint": "^1.22"
+        "laravel/pint": "^1.22",
+        "pestphp/pest": "^3.8"
     },
     "license": "MIT",
     "autoload": {
@@ -18,8 +19,12 @@
             "email": "p.mauriello54@gmail.com"
         }
     ],
-    "require": {},
     "bin": [
         "bin/verrastra"
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }
