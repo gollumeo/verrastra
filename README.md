@@ -4,7 +4,7 @@
 ![Mythical](https://img.shields.io/badge/type-mythical-lightgrey?style=for-the-badge&logo=php)
 ![NoClosures](https://img.shields.io/badge/closures-optional-blueviolet?style=for-the-badge&logo=dependabot)
 
-> ⚠️ **Work In Progress** — This runner is being forged. Expect rough edges, sharp ideas, and sacred refactors.
+> ⚠️ **Work In Progress**—This runner is being forged. Expect rough edges, sharp ideas, and sacred refactors.
 
 > **"The last test runner you'll ever trust."**
 
