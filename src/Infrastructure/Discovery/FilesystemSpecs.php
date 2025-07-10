@@ -11,6 +11,7 @@ use Gollumeo\Verrastra\Domain\Contract\SpecCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
+use ReflectionException;
 use SplFileInfo;
 
 final class FilesystemSpecs implements SpecDiscoveryContract
@@ -31,9 +32,9 @@ final class FilesystemSpecs implements SpecDiscoveryContract
             throw new Exception("Invalid path: $path");
         }
 
-        $this->loadPhpFiles($path);
-
         $snapshot = get_declared_classes();
+
+        $this->loadPhpFiles($path);
 
         $newClasses = $this->getNewDeclaredClasses($snapshot);
 
@@ -78,6 +79,8 @@ final class FilesystemSpecs implements SpecDiscoveryContract
 
     /**
      * @param  class-string[]  $classes
+     *
+     * @throws ReflectionException
      */
     private function filterSpecCases(array $classes): void
     {
@@ -86,6 +89,7 @@ final class FilesystemSpecs implements SpecDiscoveryContract
             if (! class_exists($class)) {
                 continue;
             }
+
             $reflection = new ReflectionClass($class);
 
             if ($reflection->implementsInterface(SpecCase::class)) {
