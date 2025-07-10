@@ -27,8 +27,9 @@ final readonly class Kernel
                 return 1;
             }
 
+            echo "Tests loaded:\n";
             foreach ($specs as $spec) {
-                echo $spec;
+                echo '– '.$spec."\n";
             }
 
             return 0;
