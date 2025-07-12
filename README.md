@@ -9,7 +9,7 @@
 > **"The last test runner you'll ever trust."**
 
 A modern test runner for PHP.
-Built for developers who test **intentions**, not just **methods**.
+Built for developers who test **intentions**, not just **methods**. For those who deeply care about actual promises.
 
 ---
 
